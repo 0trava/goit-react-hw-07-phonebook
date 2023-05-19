@@ -3,7 +3,8 @@ import {useState} from 'react'; // пакети для роботи зі ста�
 
 // Імпортуємо хук
 import { useSelector, useDispatch } from "react-redux";
-import { addContacts } from "../../redux/tasksContacts";
+import { addContact } from "../../redux/operetions";
+import { getContacts } from "../../redux/selectors";
 
 export const ContactForm =()=> {
 
@@ -12,7 +13,7 @@ export const ContactForm =()=> {
 
 
   const dispatch = useDispatch();// Отримуємо посилання на функцію відправки екшенів
-  const contact = useSelector(state => state.contacts.items);// ОТРИМАННЯ МАСИВУ 
+  const contacts = useSelector(getContacts);// ОТРИМАННЯ МАСИВУ 
 
 
     // INPUT - зберігаємо данні при вводі текста 
@@ -24,11 +25,12 @@ export const ContactForm =()=> {
 
 
     // ADD CONTACT - додаємо контакт до масиву
-    const addContact = ({ name, number }) => {
-      if (contact.some(value => value.name.toLocaleLowerCase() === name.toLocaleLowerCase())) {
+    const addContacts = ({ name, number }) => {
+      if (contacts.some(value => value.name.toLocaleLowerCase() === name.toLocaleLowerCase())) {
             alert(`${name} is alredy in contacts`); // якщо є, то виводимо повідомлення
       } else {
-            dispatch(addContacts( name, number )); // ADD CONTACT - зберігаємо
+            console.log("start");
+            dispatch(addContact( name, number )); // ADD CONTACT - зберігаємо
       }
     }
 
@@ -38,7 +40,7 @@ export const ContactForm =()=> {
         <form className={css.form} 
                   onSubmit={evt => {
                     evt.preventDefault(); // відміна перезавантаження сторінки
-                    addContact({ name, number }); // Передача стану компонента до addContact як (props) з батьківського компоненту.
+                    addContacts({ name, number }); // Передача стану компонента до addContact як (props) з батьківського компоненту.
                     setName("") // очищення вмісту форми
                     setNumber(""); // очищення вмісту форми
                   }}>

@@ -3,19 +3,20 @@ import css from "./Filter.module.css"; // підключення стилів н
 
 // Імпортуємо хук
 import { useDispatch, useSelector } from "react-redux";
-import { contactFilter } from "../../redux/filterContacts";
+import { setFilter } from "../../redux/filterContacts";
+import { getStatusFilter } from 'redux/selectors';
 
 export const Filter = () => {
 
   const dispatch = useDispatch();// Отримуємо посилання на функцію відправки екшенів
-  const filter = useSelector(state => state.filter);// ОТРИМАННЯ FILTER
+  const filter = useSelector(getStatusFilter);// ОТРИМАННЯ FILTER
 
     return (
       <div className={css.form__filter}>
           <label htmlFor="Find">Find contacts by name</label>
           <input
           value={filter}
-          onChange={event => dispatch(contactFilter( event.currentTarget.value ))}
+          onChange={event => dispatch(setFilter(event.target.value.trim()))}
           className={css.filter__input}
           type="text"
           name="filter"

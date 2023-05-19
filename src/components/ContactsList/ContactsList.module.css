@@ -1,6 +1,18 @@
+.contacts__list{
+    padding: 0;
+}
+
+.contacts__text{
+    margin-right: 15px;
+    margin-left: 15px;
+    min-width: 140px;
+}
+
+
 .contacts__list > li{
     display: flex;
-    gap: 50px;
+/* 
+    gap: 50px; */
     font-weight: bolder;
     align-items: center;
     justify-content: space-between

@@ -5,6 +5,7 @@ import {useState} from 'react'; // пакети для роботи зі ста�
 import { useSelector, useDispatch } from "react-redux";
 import { addContact } from "../../redux/operetions";
 import { getContacts } from "../../redux/selectors";
+import { nanoid } from 'nanoid';
 
 export const ContactForm =()=> {
 
@@ -26,11 +27,20 @@ export const ContactForm =()=> {
 
     // ADD CONTACT - додаємо контакт до масиву
     const addContacts = ({ name, number }) => {
+      console.log("start");
+      console.log(name);
       if (contacts.some(value => value.name.toLocaleLowerCase() === name.toLocaleLowerCase())) {
             alert(`${name} is alredy in contacts`); // якщо є, то виводимо повідомлення
       } else {
+
+            const contact = {
+              id: nanoid(),
+              name: name,
+              phone: number,
+            };
             console.log("start");
-            dispatch(addContact( name, number )); // ADD CONTACT - зберігаємо
+            console.log(contact);
+            dispatch(addContact( contact )); // ADD CONTACT - зберігаємо
       }
     }
 

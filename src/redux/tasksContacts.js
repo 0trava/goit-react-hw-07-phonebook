@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "../redux/operetions";
-// import { useSelector, useDispatch } from "react-redux";
 
 const initialState = {
   items: [],
@@ -8,43 +7,24 @@ const initialState = {
   error: null,
 };
 
-// робимо 2 функції, щоб не дублювати код
 const handlePending = state => {
-  return {
-    ...state,
-    isLoading: true,
-  };
+  return {...state, isLoading: true, };
 };
 
 const handleRejected = (state, action) => {
-  return {
-    ...state,
-    isLoading: false,
-    error: action.payload,
-  };
+  return {...state, isLoading: false, error: action.payload, };
 };
 
-// розбиваємо на 3 функції, щоб не дублювати код
 const handleFetchContactsSuccess = (state, action) => {
   return { ...state, isLoading: false, error: null, items: action.payload };
 };
 
 const handleAddContactSuccess = (state, action) => {
-  return {
-    ...state,
-    isLoading: false,
-    error: null,
-    items: [action.payload, ...state.items],
-  };
+  return {...state, isLoading: false, error: null, items: [action.payload, ...state.items],};
 };
 
 const handleDeleteContactSuccess = (state, action) => {
-  return {
-    ...state,
-    isLoading: false,
-    error: null,
-    items: state.items.filter(item => item.id !== action.payload.id),
-  };
+  return { ...state, isLoading: false, error: null, items: state.items.filter(item => item.id !== action.payload.id),};
 };
 
 // для кожного з цих екшенів буде створено actionCreator

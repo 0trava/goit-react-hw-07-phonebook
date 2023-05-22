@@ -3,7 +3,7 @@ import css from "./ContactsList.module.css"; // підключення стил�
 import Loader from 'components/Loader/Loader'; // підключення Loadera
 
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts, getStatusFilter, getIsLoading  } from "../../redux/selectors";
+import { getIsLoading, getFilteredContacts  } from "../../redux/selectors";
 import { fetchContacts, deleteContact } from "../../redux/operetions";
 import { useEffect } from 'react';
 
@@ -15,14 +15,9 @@ export const ContactsList = () =>{
     }, [dispatch]);
 
     // ОТРИМАННЯ МАСИВУ ДАННИХ
-    const contacts = useSelector(getContacts);    
-    const filter = useSelector(getStatusFilter); 
     const isLoading = useSelector(getIsLoading);
+    const filteredContacts = useSelector (getFilteredContacts);
 
-    // FILTER - фільтруємо введені данні 
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
 
     return (
             <ul className={css.contacts__list}>
